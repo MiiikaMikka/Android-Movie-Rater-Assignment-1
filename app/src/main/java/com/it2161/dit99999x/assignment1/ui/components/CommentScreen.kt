@@ -218,8 +218,6 @@ fun AddMovieCommentScreen(
                     text = "Your Name: ${userProfile?.userName}",
                 )
 
-                Spacer(modifier = modifier.height(16.dp))
-
                 TextField(
                     value = commentText,
                     onValueChange = { commentText = it  },

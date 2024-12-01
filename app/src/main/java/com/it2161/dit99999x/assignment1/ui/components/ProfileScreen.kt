@@ -1,5 +1,6 @@
 package com.it2161.dit99999x.assignment1.ui.components
 
+import android.content.ClipData.Item
 import android.icu.text.CaseMap.Title
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -7,11 +8,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -129,7 +133,7 @@ fun ProfileScreen(
                     DropdownMenuItem(
                         text = { Text("Edit") },
                         onClick = {
-                            navController.navigate("editprofile/${userProfile}")
+                            navController.navigate("editprofile")
                         }
                     )
                 }
@@ -138,7 +142,7 @@ fun ProfileScreen(
         )
     )
 
-    Column(
+    LazyColumn(
         modifier = modifier
             .padding(8.dp)
             .fillMaxSize(),
@@ -148,62 +152,89 @@ fun ProfileScreen(
 
         if (userProfile != null) {
 
-            //Profile Picture
-            Image(
-                painter = painterResource(id = R.drawable.avatar_1),
-                contentDescription = "Profile Picture",
-                alignment = Alignment.Center,
-                contentScale = ContentScale.Fit,
-                modifier = Modifier //Remember to add Modifier
-            )
-
-            //Display Username
-            Text(
-                text = userProfile.userName,
-                textAlign = TextAlign.Center
-            )
-
-            //Display Password?
-
-            Text(
-                text = userProfile.password,
-                textAlign = TextAlign.Center,
-
+            item{            //Profile Picture
+                Image(
+                    painter = painterResource(id = R.drawable.avatar_1),
+                    contentDescription = "Profile Picture",
+                    alignment = Alignment.Center,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier //Remember to add Modifier
                 )
+            }
+            item{
+                Column(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.Start
+                ){
+                    //Display Username
+                    Text(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth(),
+                        text = "Username: \n ${userProfile.userName}",
+                        textAlign = TextAlign.Left
+                    )
+
+                    //Display Password?
+
+                    Text(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth(),
+                        text = "Password: \n ${userProfile.password}",
+                        textAlign = TextAlign.Left,
+
+                        )
 
 
+                    //Display Email
+                    Text(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth(),
+                        text = "Email: \n ${userProfile.email}",
+                        textAlign = TextAlign.Left
+                    )
 
+                    //Display Gender
+                    Text(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth(),
+                        text = "Gender: \n ${userProfile.gender}",
+                        textAlign = TextAlign.Left
+                    )
 
-            //Display Email
-            Text(
-                text = userProfile.email,
-                textAlign = TextAlign.Center
-            )
+                    //Display Mobile Number
+                    Text(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth(),
+                        text = "Mobile Number: \n ${userProfile.mobile}",
+                        textAlign = TextAlign.Left
+                    )
 
-            //Display Gender
-            Text(
-                text = userProfile.gender,
-                textAlign = TextAlign.Center
-            )
+                    //Display Receive Updates
+                    Text(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth(),
+                        text = "To Receive Email Updates: \n ${userProfile.updates.toString()}",
+                        textAlign = TextAlign.Left
+                    )
 
-            //Display Mobile Number
-            Text(
-                text = userProfile.mobile,
-                textAlign = TextAlign.Center
-            )
-
-            //Display Receive Updates
-            Text(
-                text = userProfile.updates.toString(),
-                textAlign = TextAlign.Center
-            )
-
-            //Display Year of Birth
-            Text(
-                text = userProfile.yob,
-                textAlign = TextAlign.Center
-            )
-
+                    //Display Year of Birth
+                    Text(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth(),
+                        text = "Year of Birth: \n ${userProfile.yob}",
+                        textAlign = TextAlign.Left
+                    )
+                }
+            }
         }
 
 
@@ -297,6 +328,9 @@ fun EditProfileScreen(
 
                         MovieRaterApplication.instance.userProfile = userProfile
                         MovieRaterApplication.instance.saveProfileToFile(MovieRaterApplication.instance.applicationContext)
+
+                        navController.navigate("profile")
+
                     },
                     //modifier = Modifier.weight(0.1f)
                 ) {
@@ -308,7 +342,7 @@ fun EditProfileScreen(
 
 
 
-    Column(
+    LazyColumn(
         modifier = modifier
             .padding(8.dp)
             .fillMaxSize(),
@@ -316,48 +350,170 @@ fun EditProfileScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Image(
-            painter = painterResource(id = R.drawable.movie_viewer_logo),
-            contentDescription = "Profile Picture",
-            alignment = Alignment.TopStart,
-            contentScale = ContentScale.Fit,
-            modifier = Modifier
-                .padding(bottom = 16.dp)
-                .size(328.dp, 328.dp)
-        )
-
-        if (userProfile != null) {
-            //Edit Username
-
-            TextField(
-                value = userName ?: "",
-                onValueChange = { userName = it },
-                label = { Text("Username") },
-
+        item{
+            Image(
+                painter = painterResource(id = R.drawable.avatar_1),
+                contentDescription = "Profile Picture",
+                alignment = Alignment.TopStart,
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .padding(bottom = 16.dp)
+                    .size(328.dp, 328.dp)
             )
+        }
+        item{
+            if (userProfile != null) {
+                //Edit Username
 
-            //Edit Password
+                TextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            horizontal = 45.dp,
+                            vertical = 4.dp
+                        ),
+                    value = userName ?: "",
+                    onValueChange = { userName = it },
+                    label = { Text("Username") },
 
-            TextField(
-                value = password ?: "",
-                onValueChange = { password = it },
-                label = { Text("Password") }
-            )
+                    )
 
-            //Edit Email
+                //Edit Password
 
-            TextField(
-                value = email ?: "",
-                onValueChange = { email = it },
-                label = { Text("Email") }
+                TextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            horizontal = 45.dp,
+                            vertical = 4.dp
+                        ),
+                    value = password ?: "",
+                    onValueChange = { password = it },
+                    label = { Text("Password") }
+                )
 
-            )
+                //Edit Email
 
-            //Edit Gender
+                TextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            horizontal = 45.dp,
+                            vertical = 4.dp
+                        ),
+                    value = email ?: "",
+                    onValueChange = { email = it },
+                    label = { Text("Email") }
 
-            var enabled by remember { mutableStateOf(true) }
+                )
 
-            listofgenders.forEach { gender ->
+                //Edit Gender
+
+                var enabled by remember { mutableStateOf(true) }
+
+                listofgenders.forEach { gender ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = 45.dp,
+                                vertical = 4.dp
+                            ),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Absolute.Left
+
+                    ) {
+                        if (currentgender == gender) {
+                            enabled = false
+                        } else {
+                            enabled = true
+                        }
+
+                        RadioButton(
+
+                            enabled = enabled,
+
+                            selected = (gender == currentgender),
+                            onClick = { currentgender = gender },
+
+                            )
+                        Text(
+                            text = gender,
+                            modifier = Modifier.padding(start = 4.dp)
+                        )
+
+                    }
+
+                }
+
+                //Edit Mobile Number
+
+                TextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            horizontal = 45.dp,
+                            vertical = 4.dp
+                        ),
+                    value = mobile ?: "",
+                    onValueChange = { mobile = it },
+                    label = { Text("Mobile Number") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                )
+
+                //Year of Birth
+
+                //Dropdown for Year of Birth
+                ExposedDropdownMenuBox(
+                    modifier = Modifier,
+                    expanded = yearExpanded,
+                    onExpandedChange = { yearExpanded = !yearExpanded }
+                ) {
+                    TextField(
+                        readOnly = true,
+                        value = yob ?: "",
+                        onValueChange = {},
+                        label = { Text("Select an option") },
+                        trailingIcon = {
+                            TrailingIcon(
+                                expanded = yearExpanded
+                            )
+                        },
+                        modifier = Modifier
+                            .menuAnchor()
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = 45.dp,
+                                vertical = 4.dp
+                            )
+
+                    )
+                    ExposedDropdownMenu(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        expanded = yearExpanded,
+                        onDismissRequest = { yearExpanded = false }
+
+                    )
+                    {
+                        years.forEach { selected ->
+                            DropdownMenuItem(
+                                onClick = {
+                                    yob = selected.toString()
+                                    yearExpanded = false
+                                },
+                                text = { Text(selected.toString()) },
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+
+
+
+                //Receive Updates
+
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -369,144 +525,51 @@ fun EditProfileScreen(
                     horizontalArrangement = Arrangement.Absolute.Left
 
                 ) {
-                    if (currentgender == gender)
-                    {
-                        enabled = false
-                    }
-                    else
-                    {
-                        enabled = true
-                    }
-
-                    RadioButton(
-
-                        enabled = enabled,
-
-                        selected = (gender == currentgender),
-                        onClick = { currentgender = gender },
-
+                    receiveupdates?.let {
+                        Checkbox(
+                            checked = it,
+                            onCheckedChange = { receiveupdates = it }
                         )
-                    Text(
-                        text = gender,
-                        modifier = Modifier.padding(start = 4.dp)
-                    )
-
+                    }
+                    Text("Receive email updates")
                 }
 
-            }
-
-            //Edit Mobile Number
-
-            TextField(
-                value = mobile ?: "",
-                onValueChange = { mobile = it },
-                label = { Text("Mobile Number")},
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            )
-
-            //Year of Birth
-
-            //Dropdown for Year of Birth
-            ExposedDropdownMenuBox(
-                modifier = Modifier,
-                expanded = yearExpanded,
-                onExpandedChange = { yearExpanded = !yearExpanded }
-            ) {
-                yob?.let {
-                    TextField(
-                        readOnly = true,
-                        value = it,
-                        onValueChange = {},
-                        label = { Text("Select an option") },
-                        trailingIcon = {
-                            TrailingIcon(
-                                expanded = yearExpanded
-                            )
-                        },
-                        modifier = Modifier
-                            .menuAnchor()
-
-                    )
-                }
-                ExposedDropdownMenu(
+                Button(
                     modifier = Modifier
-                        .fillMaxWidth(),
-                    expanded = yearExpanded,
-                    onDismissRequest = { yearExpanded = false }
+                        .fillMaxWidth()
+                        .padding(
+                            horizontal = 45.dp,
+                            vertical = 4.dp
+                        ),
+                    onClick = {
+                        userProfile = receiveupdates?.let {
+                            UserProfile(
 
+
+                                gender = currentgender ?: "",
+                                userName = userName ?: "",
+                                password = password ?: "",
+                                email = email ?: "",
+
+                                mobile = mobile ?: "",
+                                updates = it,
+                                yob = yob ?: ""
+                            )
+                        }
+
+                        MovieRaterApplication.instance.userProfile = userProfile
+                        MovieRaterApplication.instance.saveProfileToFile(MovieRaterApplication.instance.applicationContext)
+
+                        navController.navigate("profile")
+                    }
                 )
                 {
-                    years.forEach { selected ->
-                        DropdownMenuItem(
-                            onClick = {
-                                yob = selected.toString()
-                                yearExpanded = false
-                            },
-                            text = { Text(selected.toString()) },
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
+                    Text("Save")
                 }
+
+
             }
-
-
-            //Receive Updates
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        horizontal = 45.dp,
-                        vertical = 4.dp
-                    ),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Absolute.Left
-
-            ) {
-                receiveupdates?.let {
-                    Checkbox(
-                        checked = it,
-                        onCheckedChange = { receiveupdates = it }
-                    )
-                }
-                Text("Receive email updates")
-            }
-
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        horizontal = 45.dp,
-                        vertical = 4.dp),
-                onClick = {
-                    userProfile = receiveupdates?.let {
-                        UserProfile(
-
-
-
-                            gender = currentgender ?: "",
-                            userName = userName ?: "",
-                            password = password ?: "",
-                            email = email ?: "",
-
-                            mobile = mobile ?: "",
-                            updates = it,
-                            yob = yob ?: ""
-                        )
-                    }
-
-                    MovieRaterApplication.instance.userProfile = userProfile
-                    MovieRaterApplication.instance.saveProfileToFile(MovieRaterApplication.instance.applicationContext)
-                }
-            )
-                    {
-                        Text("Save")
-                    }
-
-
-
         }
-
 
         //Username
 

@@ -8,12 +8,15 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lock
 
@@ -38,6 +41,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -73,7 +77,8 @@ o cancel registration
 fun RegisterUserScreen(
     modifier: Modifier = Modifier
         .fillMaxWidth()
-        .fillMaxSize(),
+        .fillMaxSize()
+        .padding(horizontal = 8.dp, vertical = 0.dp),
     navController: NavController = rememberNavController(),
     onAppbarChange: (AppBarState) -> Unit
 ) {
@@ -107,15 +112,23 @@ fun RegisterUserScreen(
     onAppbarChange(
         AppBarState(
 
-
             title = "Register",
+            navigationIcon = {
+                IconButton(
+                    onClick = {
+                        navController.navigate("login")
+                    }
+                ) {
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back")
+                }
+            },
 
             )
     )
 
     LazyColumn(
         modifier = modifier
-            .padding(4.dp)
+            .padding(horizontal = 8.dp, vertical = 0.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
 
@@ -127,13 +140,28 @@ fun RegisterUserScreen(
                 onValueChange = { username = it },
                 label = { Text("UserID") },
                 singleLine = true,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = 45.dp,
+                        vertical = 4.dp
+                    )
             )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
         }
 
         item{
             //password
             //add Visual transformation for password
             TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = 45.dp,
+                        vertical = 4.dp
+                    ),
                 value = password,
                 onValueChange = { password = it },
                 label = { Text("Password") },
@@ -155,10 +183,18 @@ fun RegisterUserScreen(
                         }
                     }
                 }
+
             )
+            Spacer(modifier = Modifier.height(8.dp))
 
             //Confirm Password
             TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = 45.dp,
+                        vertical = 4.dp
+                    ),
                 value = confirmpassword,
                 onValueChange = { confirmpassword = it },
                 label = { Text("Confirm Password") },
@@ -181,16 +217,24 @@ fun RegisterUserScreen(
                     }
                 }
             )
+            Spacer(modifier = Modifier.height(8.dp))
         }
 
         item{
             //Email
             TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = 45.dp,
+                        vertical = 4.dp
+                    ),
                 value = email,
                 onValueChange = { email = it },
                 label = { Text("Email") },
                 singleLine = true
             )
+            Spacer(modifier = Modifier.height(8.dp))
         }
         //Gender
         item{
@@ -220,15 +264,23 @@ fun RegisterUserScreen(
                 }
 
             }
+            Spacer(modifier = Modifier.height(8.dp))
         }
 
         item{        //Mobile Number
             TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = 45.dp,
+                        vertical = 4.dp
+                    ),
                 value = mobilenumber,
                 onValueChange = { mobilenumber = it },
                 label = { Text("Enter your number") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             )
+            Spacer(modifier = Modifier.height(8.dp))
         }
 
 
@@ -252,6 +304,11 @@ fun RegisterUserScreen(
                     },
                     modifier = Modifier
                         .menuAnchor()
+                        .fillMaxWidth()
+                        .padding(
+                            horizontal = 45.dp,
+                            vertical = 4.dp
+                        )
 
                 )
                 ExposedDropdownMenu(
@@ -274,6 +331,7 @@ fun RegisterUserScreen(
                     }
                 }
             }
+            Spacer(modifier = Modifier.height(8.dp))
         }
 
         item{//for recieving email updates
@@ -294,6 +352,7 @@ fun RegisterUserScreen(
                 )
                 Text("Receive email updates")
             }
+
         }
 
         item {
@@ -304,6 +363,8 @@ fun RegisterUserScreen(
 
 
         item{
+            Spacer(modifier = Modifier.height(8.dp))
+
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
