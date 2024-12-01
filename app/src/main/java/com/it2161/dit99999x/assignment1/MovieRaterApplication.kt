@@ -134,7 +134,7 @@ class MovieRaterApplication : Application() {
 
     }
 
-    private fun saveProfileToFile(context: Context) {
+    fun saveProfileToFile(context: Context) {
 
         if (context != null) {
             val gson = Gson()
