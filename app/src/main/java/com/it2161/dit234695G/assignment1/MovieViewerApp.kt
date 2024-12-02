@@ -1,4 +1,4 @@
-package com.it2161.dit99999x.assignment1
+package com.it2161.dit234695G.assignment1
 
 import android.os.Bundle
 import android.util.Log
@@ -28,18 +28,16 @@ import androidx.navigation.compose.composable
 
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.google.gson.Gson
-import com.it2161.dit99999x.assignment1.data.Comments
-import com.it2161.dit99999x.assignment1.data.UserProfile
-import com.it2161.dit99999x.assignment1.ui.components.AddMovieCommentScreen
+import com.it2161.dit234695G.assignment1.data.Comments
+import com.it2161.dit234695G.assignment1.ui.components.AddMovieCommentScreen
 
-import com.it2161.dit99999x.assignment1.ui.components.CommentMovieScreen
-import com.it2161.dit99999x.assignment1.ui.components.EditProfileScreen
-import com.it2161.dit99999x.assignment1.ui.components.LandingScreen
-import com.it2161.dit99999x.assignment1.ui.components.LoginScreen
-import com.it2161.dit99999x.assignment1.ui.components.MovieDetailScreen
-import com.it2161.dit99999x.assignment1.ui.components.ProfileScreen
-import com.it2161.dit99999x.assignment1.ui.components.RegisterUserScreen
+import com.it2161.dit234695G.assignment1.ui.components.CommentMovieScreen
+import com.it2161.dit234695G.assignment1.ui.components.EditProfileScreen
+import com.it2161.dit234695G.assignment1.ui.components.LandingScreen
+import com.it2161.dit234695G.assignment1.ui.components.LoginScreen
+import com.it2161.dit234695G.assignment1.ui.components.MovieDetailScreen
+import com.it2161.dit234695G.assignment1.ui.components.ProfileScreen
+import com.it2161.dit234695G.assignment1.ui.components.RegisterUserScreen
 
 data class AppBarState(
     var title: String = "",

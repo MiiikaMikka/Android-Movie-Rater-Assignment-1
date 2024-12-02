@@ -1,4 +1,4 @@
-package com.it2161.dit99999x.assignment1.ui.components
+package com.it2161.dit234695G.assignment1.ui.components
 
 import android.util.Log
 import android.widget.Toast
@@ -39,9 +39,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.it2161.dit99999x.assignment1.AppBarState
-import com.it2161.dit99999x.assignment1.MovieRaterApplication
-import com.it2161.dit99999x.assignment1.data.UserProfile
+import com.it2161.dit234695G.assignment1.AppBarState
+import com.it2161.dit234695G.assignment1.MovieRaterApplication
 
 
 @Composable

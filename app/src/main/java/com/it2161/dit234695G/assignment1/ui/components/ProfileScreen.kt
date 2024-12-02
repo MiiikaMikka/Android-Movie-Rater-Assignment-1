@@ -1,11 +1,8 @@
-package com.it2161.dit99999x.assignment1.ui.components
+package com.it2161.dit234695G.assignment1.ui.components
 
-import android.content.ClipData.Item
-import android.icu.text.CaseMap.Title
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,18 +11,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults.TrailingIcon
@@ -43,6 +43,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -50,12 +51,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.it2161.dit99999x.assignment1.AppBarState
-import com.it2161.dit99999x.assignment1.MovieRaterApplication
-import com.it2161.dit99999x.assignment1.R
-import com.it2161.dit99999x.assignment1.data.UserProfile
+import com.it2161.dit234695G.assignment1.AppBarState
+import com.it2161.dit234695G.assignment1.MovieRaterApplication
+import com.it2161.dit234695G.assignment1.R
+import com.it2161.dit234695G.assignment1.data.UserProfile
 import java.time.Year
 
 /*
@@ -83,6 +85,8 @@ fun ProfileScreen(
 
 
     var userProfile = MovieRaterApplication.instance.userProfile
+
+
 
     //just so there isn't any error
     if (userProfile != null)
@@ -152,16 +156,26 @@ fun ProfileScreen(
 
         if (userProfile != null) {
 
-            item{            //Profile Picture
+            item{
+                //Profile Picture
+
+
                 Image(
-                    painter = painterResource(id = R.drawable.avatar_1),
+                    painter = painterResource(userProfile.userImage),
                     contentDescription = "Profile Picture",
                     alignment = Alignment.Center,
                     contentScale = ContentScale.Fit,
                     modifier = Modifier //Remember to add Modifier
                 )
+
+
             }
             item{
+
+                Column {
+
+                }
+
                 Column(
                     modifier = Modifier
                         .padding(8.dp)
@@ -183,10 +197,41 @@ fun ProfileScreen(
                         modifier = Modifier
                             .padding(8.dp)
                             .fillMaxWidth(),
-                        text = "Password: \n ${userProfile.password}",
-                        textAlign = TextAlign.Left,
+                        text = "Password: "
 
+                    )
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                            .padding(bottom = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Absolute.Left
+                    ) {
+
+                        // Basic Text Field for Password Input
+                        BasicTextField(
+                            readOnly = true,
+                            value = userProfile!!.password,
+                            onValueChange = {},
+                            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                            singleLine = true,
+                            modifier = Modifier
+                                .weight(1f) // Take up remaining space
+                                .padding(vertical = 8.dp)
                         )
+
+                        // Trailing Icon for Password Visibility Toggle
+                        IconButton(onClick = {
+                            passwordVisibility = !passwordVisibility
+                        }) {
+                            Icon(
+                                imageVector = if (passwordVisibility) Icons.Filled.Lock else Icons.Outlined.Lock,
+                                contentDescription = "Toggle Password Visibility"
+                            )
+                        }
+                    }
 
 
                     //Display Email
@@ -277,8 +322,13 @@ fun EditProfileScreen(
     var password = userProfile?.password
     var email = userProfile?.email
 
+    var userImage = userProfile?.userImage
+    val listofimages = listOf(R.drawable.avatar_1, R.drawable.avatar_2, R.drawable.avatar_3)
+
     var currentgender = userProfile?.gender
     var listofgenders = listOf("Male", "Female", "Non-Binary", "Prefer not to say")
+
+
     //var genderExpanded by remember { mutableStateOf(false) }
 
     var receiveupdates = userProfile?.updates
@@ -311,19 +361,21 @@ fun EditProfileScreen(
                 IconButton(
                     onClick = {
                         userProfile = receiveupdates?.let {
-                            UserProfile(
 
+                                UserProfile(
 
+                                    userImage = userImage?: 2130968577,
 
-                                gender = currentgender ?: "",
-                                userName = userName ?: "",
-                                password = password ?: "",
-                                email = email ?: "",
+                                    gender = currentgender ?: "",
+                                    userName = userName ?: "",
+                                    password = password ?: "",
+                                    email = email ?: "",
 
-                                mobile = mobile ?: "",
-                                updates = it,
-                                yob = yob ?: ""
-                            )
+                                    mobile = mobile ?: "",
+                                    updates = it,
+                                    yob = yob ?: ""
+                                )
+
                         }
 
                         MovieRaterApplication.instance.userProfile = userProfile
@@ -351,16 +403,58 @@ fun EditProfileScreen(
     ) {
 
         item{
-            Image(
-                painter = painterResource(id = R.drawable.avatar_1),
-                contentDescription = "Profile Picture",
-                alignment = Alignment.TopStart,
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .padding(bottom = 16.dp)
-                    .size(328.dp, 328.dp)
-            )
+            if (userImage != null) {
+                Image(
+                    painter = painterResource(userImage!!),
+                    contentDescription = "Profile Picture",
+                    alignment = Alignment.TopStart,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .padding(bottom = 16.dp)
+                        .size(328.dp, 328.dp)
+                )
+            }
+
+            var imageAlreadySelected by remember { mutableStateOf(true) }
+
+            listofimages.forEach{image ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            horizontal = 45.dp,
+                            vertical = 4.dp
+                        ),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Absolute.Left
+
+                ) {
+                    if (userImage == image) {
+                        imageAlreadySelected = false
+                    } else {
+                        imageAlreadySelected = true
+                    }
+
+                    RadioButton(
+
+                        enabled = imageAlreadySelected,
+
+                        selected = (image == userImage),
+                        onClick = { userImage = image },
+
+                        )
+                    Text(
+                        text = image.toString(),
+                        modifier = Modifier.padding(start = 4.dp)
+                    )
+                }
+            }
+
         }
+
+
+
+
         item{
             if (userProfile != null) {
                 //Edit Username
@@ -379,18 +473,38 @@ fun EditProfileScreen(
                     )
 
                 //Edit Password
+                password?.let {
+                    TextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = 45.dp,
+                                vertical = 4.dp
+                            ),
+                        value = it,
+                        onValueChange = { password = it },
+                        label = { Text("Password") },
+                        singleLine = true,
+                        visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                        leadingIcon = {
+                            Icon(Icons.Outlined.Lock, contentDescription = "Password")
+                        },
+                        trailingIcon = {
+                            if (passwordVisibility) {
+                                IconButton(onClick = { passwordVisibility = false })
+                                {
+                                    Icon(imageVector = Icons.Filled.Lock, "visible")
+                                }
+                            } else {
+                                IconButton(onClick = { passwordVisibility = true })
+                                {
+                                    Icon(imageVector = Icons.Filled.Lock, "visible")
+                                }
+                            }
+                        }
 
-                TextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            horizontal = 45.dp,
-                            vertical = 4.dp
-                        ),
-                    value = password ?: "",
-                    onValueChange = { password = it },
-                    label = { Text("Password") }
-                )
+                    )
+                }
 
                 //Edit Email
 
@@ -470,6 +584,13 @@ fun EditProfileScreen(
                     onExpandedChange = { yearExpanded = !yearExpanded }
                 ) {
                     TextField(
+                        modifier = Modifier
+                            .menuAnchor()
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = 45.dp,
+                                vertical = 4.dp
+                            ),
                         readOnly = true,
                         value = yob ?: "",
                         onValueChange = {},
@@ -479,13 +600,7 @@ fun EditProfileScreen(
                                 expanded = yearExpanded
                             )
                         },
-                        modifier = Modifier
-                            .menuAnchor()
-                            .fillMaxWidth()
-                            .padding(
-                                horizontal = 45.dp,
-                                vertical = 4.dp
-                            )
+
 
                     )
                     ExposedDropdownMenu(
@@ -543,20 +658,22 @@ fun EditProfileScreen(
                         ),
                     onClick = {
                         userProfile = receiveupdates?.let {
-                            UserProfile(
 
+                                UserProfile(
 
-                                gender = currentgender ?: "",
-                                userName = userName ?: "",
-                                password = password ?: "",
-                                email = email ?: "",
+                                    userImage = userImage?: 2130968577,
 
-                                mobile = mobile ?: "",
-                                updates = it,
-                                yob = yob ?: ""
-                            )
+                                    gender = currentgender ?: "",
+                                    userName = userName ?: "",
+                                    password = password ?: "",
+                                    email = email ?: "",
+
+                                    mobile = mobile ?: "",
+                                    updates = it,
+                                    yob = yob ?: ""
+                                )
+
                         }
-
                         MovieRaterApplication.instance.userProfile = userProfile
                         MovieRaterApplication.instance.saveProfileToFile(MovieRaterApplication.instance.applicationContext)
 

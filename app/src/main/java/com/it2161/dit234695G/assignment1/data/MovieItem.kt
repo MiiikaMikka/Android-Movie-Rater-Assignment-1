@@ -1,4 +1,4 @@
-package com.it2161.dit99999x.assignment1.data
+package com.it2161.dit234695G.assignment1.data
 
 
 data class MovieItem(

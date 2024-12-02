@@ -1,4 +1,4 @@
-package com.it2161.dit99999x.assignment1
+package com.it2161.dit234695G.assignment1
 
 //import com.it2161.dit99999x.assignment1.data.Comments
 //import com.it2161.dit99999x.assignment1.data.MovieItem
@@ -10,17 +10,17 @@ import android.graphics.BitmapFactory
 import android.util.Base64
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.it2161.dit99999x.assignment1.data.Comments
-import com.it2161.dit99999x.assignment1.data.MovieItem
-import com.it2161.dit99999x.assignment1.data.UserProfile
-import com.it2161.dit99999x.assignment1.data.mvBeneathTheSurface
-import com.it2161.dit99999x.assignment1.data.mvCityOfShadowsData
-import com.it2161.dit99999x.assignment1.data.mvEchosOfEternityData
-import com.it2161.dit99999x.assignment1.data.mvIntoTheUnknownData
-import com.it2161.dit99999x.assignment1.data.mvLostInTimeData
-import com.it2161.dit99999x.assignment1.data.mvShadowsOfthePastData
-import com.it2161.dit99999x.assignment1.data.mvTheLastFrontierData
-import com.it2161.dit99999x.assignment1.data.mvTheSilentStormData
+import com.it2161.dit234695G.assignment1.data.Comments
+import com.it2161.dit234695G.assignment1.data.MovieItem
+import com.it2161.dit234695G.assignment1.data.UserProfile
+import com.it2161.dit234695G.assignment1.data.mvBeneathTheSurface
+import com.it2161.dit234695G.assignment1.data.mvCityOfShadowsData
+import com.it2161.dit234695G.assignment1.data.mvEchosOfEternityData
+import com.it2161.dit234695G.assignment1.data.mvIntoTheUnknownData
+import com.it2161.dit234695G.assignment1.data.mvLostInTimeData
+import com.it2161.dit234695G.assignment1.data.mvShadowsOfthePastData
+import com.it2161.dit234695G.assignment1.data.mvTheLastFrontierData
+import com.it2161.dit234695G.assignment1.data.mvTheSilentStormData
 import jsonData
 import org.json.JSONArray
 import java.io.File

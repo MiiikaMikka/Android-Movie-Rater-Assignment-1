@@ -1,17 +1,13 @@
-package com.it2161.dit99999x.assignment1.ui.components
+package com.it2161.dit234695G.assignment1.ui.components
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
@@ -37,10 +33,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.it2161.dit99999x.assignment1.AppBarState
-import com.it2161.dit99999x.assignment1.MovieRaterApplication
-import com.it2161.dit99999x.assignment1.R
-import com.it2161.dit99999x.assignment1.data.UserProfile
+import com.it2161.dit234695G.assignment1.AppBarState
+import com.it2161.dit234695G.assignment1.MovieRaterApplication
+import com.it2161.dit234695G.assignment1.R
+import com.it2161.dit234695G.assignment1.data.UserProfile
 
 /*
 Login page must allow users to:
@@ -125,7 +121,9 @@ fun LoginScreen(
             TextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 8.dp),
+
                 value = password,
                 onValueChange = { password = it },
                 label = { Text("Password") },
@@ -160,7 +158,12 @@ fun LoginScreen(
 
                     var userProfile = UserProfile(
                         userName = username,
-                        password = password
+                        password = password, email = "",
+                        gender = "",
+                        mobile = "",
+                        updates = false,
+                        userImage = R.drawable.avatar_1,
+
                     )
                     if (registeredusers != null) {
                         if (userProfile.userName == registeredusers.userName && userProfile.password == registeredusers.password) {
